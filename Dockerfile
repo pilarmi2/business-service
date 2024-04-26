@@ -20,6 +20,8 @@ ENV PORT=8000
 EXPOSE 8000
 
 ENV HOST="0.0.0.0"
+ENV STORE_SERVICE="https://scoring-store-service.azurewebsites.net"
+ENV API_SERVICE="https://scoring-api-service.azurewebsites.net"
 
 # Start service
 CMD ["python", "main.py"]
