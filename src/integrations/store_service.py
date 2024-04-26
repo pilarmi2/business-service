@@ -41,8 +41,16 @@ class StoreService:
 
         return [LoanStatement(**item) for item in data]
 
-    def get_score(self, municipality_id: str, period_id: str) -> Score:
-        pass
+    def get_score(self, municipality_id: str, period: str) -> Score:
+        response = requests.get(f"{self.__url}/municipalities/{municipality_id}/score?period={period}")
+
+        if response.text != "null":
+            return Score(**response.json())
+        else:
+            return None
 
     def post_score(self, score: Score) -> StandardResponse:
-        pass
+        response = requests.post(self.__url + f"/municipalities/{score.municipality_id}/score",
+                                 data=score.json())
+        print(response.text)
+        return StandardResponse(status=response.status_code, message=response.text)
