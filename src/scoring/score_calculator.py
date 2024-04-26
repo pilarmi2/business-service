@@ -10,8 +10,17 @@ class ScoreCalculator:
     def calculate_score(self, municipality: Municipality,
                         income_statement: IncomeStatement,
                         loans_statements: List[LoanStatement]) -> Score:
-        score: float = 0.0
+        """
+        Calculates the score for a municipality based on its financial data.
 
+        Args:
+            municipality (Municipality): Object representing the municipality.
+            income_statement (IncomeStatement): Object representing the income statement of the municipality.
+            loans_statements (List[LoanStatement]): List of loan statements of the municipality.
+
+        Returns:
+            Score: Object representing the calculated score.
+        """
         citizens: int = municipality.citizens
         assets: float = income_statement.assets
         passives: float = income_statement.passives
@@ -20,6 +29,6 @@ class ScoreCalculator:
         for loan in loans_statements:
             aggregated_loans += (loan.drawn_amount - loan.repaid_amount)
 
-        score = round(max(1, (passives + aggregated_loans - assets) / citizens), 2)
+        score: float = round(max(1, (passives + aggregated_loans - assets) / citizens), 2)
 
         return Score(municipality_id=municipality.municipality_id, score=score, period=income_statement.period)
