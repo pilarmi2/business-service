@@ -7,9 +7,9 @@ from src.models.score import Score
 
 
 class ScoreCalculator:
-    def calculate_score(self, municipality: Municipality = None,
-                        income_statement: IncomeStatement = None,
-                        loans_statements: List[LoanStatement] = None) -> Score:
+    def calculate_score(self, municipality: Municipality,
+                        income_statement: IncomeStatement,
+                        loans_statements: List[LoanStatement]) -> Score:
         score: float = 0.0
 
         citizens: int = municipality.citizens
